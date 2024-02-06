@@ -1,8 +1,13 @@
 const HttpError = require("../helpers/HttpError.js");
+const contactsService = require("../services/contactsServices");
 
 const getAllContacts = async (req, res, next) => {
-  const result = await contactsService.listContacts();
-  res.json(result);
+  try {
+    const result = await contactsService.listContacts();
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getOneContact = async (req, res, next) => {
@@ -41,21 +46,29 @@ const createContact = async (req, res, next) => {
 };
 
 const updateContact = async (req, res, next) => {
-  const { id } = req.params;
-  const result = await contactsService.updateContact(id, req.body);
-  if (!result) {
-    throw HttpError(404);
+  try {
+    const { id } = req.params;
+    const result = await contactsService.updateContact(id, req.body);
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.json(result);
+  } catch (error) {
+    next(error);
   }
-  res.json(result);
 };
 
 const updateStatusContact = async (req, res, next) => {
-  const { id } = req.params;
-  const result = await contactsServices.updateStatusContact(id, req.body);
-  if (!result) {
-    throw HttpError(404);
+  try {
+    const { id } = req.params;
+    const result = await contactsService.updateStatusContact(id, req.body);
+    if (!result) {
+      throw HttpError(404);
+    }
+    res.json(result);
+  } catch (error) {
+    next(error);
   }
-  res.json(result);
 };
 
 module.exports = {
