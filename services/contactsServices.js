@@ -32,10 +32,11 @@ async function updateContact(id, data) {
 
 async function updateStatusContact(contactId, body) {
   if (contactId.length === 24) {
-    return await Contact.findByIdAndUpdate(contactId, body, { new: true });
+    return await Contact.findOneAndUpdate(contactId, body, { new: true });
   }
   throw HttpError(404);
 }
+
 module.exports = {
   listContacts,
   getContactById,
@@ -43,4 +44,4 @@ module.exports = {
   addContact,
   updateContact,
   updateStatusContact,
-};
+}
