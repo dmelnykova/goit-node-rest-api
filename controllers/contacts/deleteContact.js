@@ -3,8 +3,9 @@ const { HttpError } = require("../../helpers/HttpError");
 
 
 const deleteContact = async (req, res, next) => {
+  const { _id: owner } = req.user;
   const { id } = req.params;
-  const result = await contactsServices.removeContact(id);
+  const result = await contactsServices.removeContact(owner, id);
   if (!result) {
     throw HttpError(404);
   }

@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const contactsRouter = require('./routes/contactsRouter.js');
+const contactsRouter = require('./routes/contactsRouter/contactsRouter');
 
 const { DB_HOST } = process.env;
 

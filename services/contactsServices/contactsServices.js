@@ -1,5 +1,5 @@
-const { HttpError } = require("../helpers/HttpError");
-const Contact = require("../models/contacts");
+const { HttpError } = require("../../helpers/HttpError");
+const Contact = require("../../models/contactsModels/contacts");
 
 async function listContacts() {
   return await Contact.find();
