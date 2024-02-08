@@ -1,3 +1,3 @@
 const contactsRouter = require(".");
 
-module.exports = contactsRouter
+module.exports = contactsRouter;
