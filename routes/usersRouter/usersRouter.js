@@ -12,7 +12,7 @@ const {
   createUserSchema,
   loginUserSchema,
   updateUserSubscriptionSchema,
-} = require("../../schemas/usersSchemas");
+} = require("../../schemas/usersSchemas/usersSchema");
 
 router.post("/register", validateBody(createUserSchema), registration);
 
