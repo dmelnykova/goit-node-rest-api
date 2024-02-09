@@ -19,7 +19,7 @@ const login = async (req, res, next) => {
     throw HttpError(401, "Email or password is wrong");
     }
     
-  const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+  const token = jwt.sign({ id: user._id }, JWT_SECRET, {
     expiresIn: '15d',
   });
 

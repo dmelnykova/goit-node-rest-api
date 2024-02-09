@@ -8,15 +8,11 @@ const {
 } = require("../../controllers/usersController");
 const { validateBody } = require("../../helpers");
 const { authMiddleware } = require("../../middlewares/authMiddleware");
-const {
-  createUserSchema,
-  loginUserSchema,
-  updateUserSubscriptionSchema,
-} = require("../../schemas/usersSchemas/usersSchema");
+const userSchema = require("../../schemas/usersSchemas/usersSchema");
 
-router.post("/register", validateBody(createUserSchema), registration);
+router.post("/register", validateBody(userSchema), registration);
 
-router.post("/login", validateBody(loginUserSchema), login);
+router.post("/login", validateBody(userSchema), login);
 
 router.post("/logout", authMiddleware, logout);
 
@@ -25,7 +21,6 @@ router.get("/current", authMiddleware, getInfo);
 router.patch(
   "",
   authMiddleware,
-  validateBody(updateUserSubscriptionSchema),
   updateSubscription
 );
 
