@@ -1,13 +1,17 @@
 const router = require("express").Router();
+// const multer = require("multer");
+// const upload = multer();
+
 const {
   registration,
   login,
   logout,
   getInfo,
   updateSubscription,
+  updateAvatar,
 } = require("../../controllers/usersController");
 const { validateBody } = require("../../helpers");
-const { authMiddleware } = require("../../middlewares/authMiddleware");
+const { authMiddleware, upload } = require("../../middlewares");
 const userSchema = require("../../schemas/usersSchemas/usersSchema");
 
 router.post("/register", validateBody(userSchema), registration);
@@ -21,7 +25,10 @@ router.get("/current", authMiddleware, getInfo);
 router.patch(
   "",
   authMiddleware,
+  validateBody(userSchema),
   updateSubscription
 );
+
+router.patch("/avatars", authMiddleware, upload.single("avatar"), updateAvatar);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 const HttpError = require("../helpers/HttpError")
-const controllerWrapper = require("../helpers/controllerWrapper")
 const jwt = require("jsonwebtoken");
 const User = require("../models/usersModels/users");
 const {JWT_SECRET} = process.env
@@ -30,4 +29,4 @@ const authMiddleware = async (req, res, next) => {
     next();
 };
 
-module.exports ={ authMiddleware: controllerWrapper(authMiddleware)}
+module.exports = authMiddleware;
