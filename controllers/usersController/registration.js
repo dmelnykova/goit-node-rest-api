@@ -1,16 +1,17 @@
-const User = require("../../models/usersModels/users");
-const { HttpError, sendMail } = require('../../helpers');
-const bcrypt = require("bcrypt");
-const gravatar = require("gravatar");
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
+const gravatar = require('gravatar');
+const User = require('../../models/usersModels/users');
+const { sendEmail, HttpError } = require('../../helpers');
 const { BASE_URL } = process.env;
-
 
 const registration = async (req, res, next) => {
   const { email, password } = req.body;
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(password, salt);
   const avatarURL = gravatar.url(email);
-  const verifyToken = nanoid();
+  const verifyToken = uuid.v4();
+
   try {
     const result = await User.create({
       email,
@@ -18,7 +19,7 @@ const registration = async (req, res, next) => {
       avatarURL,
       verifyToken,
     });
-    sendMail({
+    sendEmail({
       to: email,
       subject: 'Please confirm your email',
       html: `<a href="${BASE_URL}/users/verify/${verifyToken}">Submit email</a>`,

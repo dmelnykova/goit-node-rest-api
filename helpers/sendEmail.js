@@ -21,7 +21,7 @@ const sendEmail = async ({ to, subject, html, text = '' }) => {
     html,
     text,
   };
-  await transport.sendEmail(email);
+  await transport.sendMail(email);
 };
 
 module.exports = sendEmail;
